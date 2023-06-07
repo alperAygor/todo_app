@@ -1,0 +1,141 @@
+@import url(style.css);
+
+
+@media(min-width:992px) {
+
+
+    #mainImage{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+}
+#mainImg img{
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    opacity: 0.8;
+}
+.container-1{
+    position: absolute;
+    z-index: 1;
+    top: 3%;
+    left: 10%;
+}
+.container-2{
+    position: absolute;
+    z-index: 1;
+    top: 5%;
+    right: 0;
+    width: 43%;
+}
+.container-3{
+    position: absolute;
+    z-index: 1;
+    bottom: 5%;
+    left: 5%;
+    color:azure;
+    font-weight: bolder;
+}
+main{
+    position: relative;
+    height: 100%;
+    width: 80%;
+    margin: 0 6%;
+}
+
+}
+@media (max-width:992px ) and (min-width:576px){
+    .container-1{
+        position: absolute;
+        z-index: 1;
+        top: 3%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .container-2{
+        position: absolute;
+        z-index: 1;
+        width: 55%;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .container-3{
+        display: none;
+        z-index: 1;
+        color:azure;
+        font-weight: bolder;
+    }
+    #mainImage{
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+        background-color: white;
+    }
+    #mainImg img{
+        height: 1300px;
+        width: 100%;
+        z-index: 0;
+        opacity: 0.8;
+    }
+    .container-1 p{
+        margin-top: 10px;
+        color: white;
+    }
+    main{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0 0;
+   }
+}
+@media(max-width:576px){
+    .container-1{
+        position: absolute;
+        z-index: 1;
+        top: 3%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .container-2{
+        position: absolute;
+        z-index: 1;
+        width: 72%;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .container-3{
+        display: none;
+        z-index: 1;
+        color:azure;
+        font-weight: bolder;
+    }
+    #mainImage{
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+        background-color: white;
+    }
+    #mainImg img{
+        height: 1300px;
+        width: 100%;
+        z-index: 0;
+        opacity: 0.8;
+    }
+    .container-1 p{
+        margin-top: 10px;
+        color: white;
+    }
+    main{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+   }
+
+}

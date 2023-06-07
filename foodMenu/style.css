@@ -1,0 +1,73 @@
+.card-img-1{ 
+    width: 50%;
+    background-image: url(imageCard.jpeg);
+    background-position: center;
+    border-radius: 8px;
+}
+.card-body{
+    width: 50%;
+}
+.card-img-2{
+    width: 50%;
+    background-image: url(images.jpeg);
+    background-position: center;
+    border-radius: 8px;
+}
+.card-title{
+    padding: 15px;
+    background-color: rgba(255, 72, 26, 0.877);
+    font-family: Ubuntu;
+    box-shadow: rgba(179, 27, 27, 0.75) 0px 14px 28px, rgba(180, 29, 29, 0.72) 0px 10px 10px;
+}
+.card-img-3{
+    width: 50%;
+    background-image: url(images2.jpeg);
+    background-position: center;
+    border-radius: 8px;
+}
+.card-img-4{
+    width: 50%;
+    background-image: url(images3.jpeg);
+    background-position: center;
+    border-radius: 8px;
+}
+
+#mainImg figure img {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+ }
+ #mainImg figure:hover img {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+ }
+ .card{
+    width:90%;
+    display: flex;
+    margin-top: 30px;
+    font-family: style;
+    background-color: #f1f1f1;
+    opacity: 0.7;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 8px;
+}
+html,body{
+
+    background-color: black;
+     margin: 0;
+    padding: 0;
+    height: 100%;
+    z-index: -1;
+    box-sizing: border-box;
+    border: none;
+}
+.container-1 p{
+    margin-top: 10px;
+}
+.container-1 h1{
+    letter-spacing: 10px;
+    color: brown;
+    font-weight: bolder;
+    font-size: 40px;
+}
