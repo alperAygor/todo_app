@@ -10,20 +10,20 @@ addBtn.addEventListener("click", () => {
   const ul = document.querySelector(".list-group");
 
   const li = document.createElement("li");
-  li.classList.add("list-group-item", "d-flex", "py-3");
+  li.classList.add("list-group-item", "flex", "py-3");
 
   const titleInput = document.createElement("input");
-  titleInput.classList.add("form-control", "w-25", "mx-2");
+  titleInput.classList.add("form-input", "w-1/4", "mx-2","shadow","bg-gray-50","rounded");
   titleInput.id = "titleInput";
   titleInput.type = "text";
 
   const contentInput = document.createElement("input");
-  contentInput.classList.add("form-control", "w-50", "mx-2");
+  contentInput.classList.add("form-input", "w-1/2", "mx-2","shadow","bg-gray-50","rounded");
   contentInput.id = "contentInput";
   contentInput.type = "text";
 
   const saveBtn = document.createElement("button");
-  saveBtn.classList.add("btn", "btn-primary", "ms-auto", "me-2");
+  saveBtn.classList.add("btn", "bg-sky-500", "ms-auto", "me-2","hover:bg-sky-600","rounded","p-2", "transition","duration-300","hover:scale-110","ease-in-out");
   saveBtn.id = "saveBtn";
   saveBtn.textContent = "Save";
 
@@ -40,7 +40,7 @@ addBtn.addEventListener("click", () => {
     const contentInput = document.querySelector("#contentInput").value;
 
     if (titleInput === "" || contentInput === "") {
-      UI.showAlert("warning", "Lütfen alanları doğru şekilde doldurunuz!");
+      UI.showAlert("bg-yellow-400", "Lütfen alanları doğru şekilde doldurunuz!");
     } else {
       await UI.saveInput("add");
     await UI.init();
@@ -66,7 +66,7 @@ ul.addEventListener("click", async (event) => {
       // if(!response.ok){throw new error("hata")}
     //   UI.taskList = await response.json();
     //  UI.displayTask();
-      UI.showAlert("success", "Başarılı bir şekilde silindi");
+      UI.showAlert("bg-rose-400", "Başarılı bir şekilde silindi");
     } catch (error) {
       console.error(error);
     }
@@ -79,17 +79,17 @@ ul.addEventListener("click", async (event) => {
     const filteredTask = UI.taskList.find((task) => task.id === id);
 
     const titleInput = document.createElement("input");
-    titleInput.classList.add("form-control", "w-25", "mx-2");
+    titleInput.classList.add("form-input", "w-1/4", "mx-2","bg-gray-50","rounded","shadow");
     titleInput.id = "titleInput";
     titleInput.value = filteredTask.taskTitle;
 
     const contentInput = document.createElement("input");
-    contentInput.classList.add("form-control", "w-50", "mx-2");
+    contentInput.classList.add("form-input", "w-1/2", "mx-2","shadow","bg-gray-50","rounded");
     contentInput.id = "contentInput";
     contentInput.value = filteredTask.taskContent;
 
     const saveBtn = document.createElement("button");
-    saveBtn.classList.add("btn", "btn-primary", "ms-auto", "me-2");
+    saveBtn.classList.add("btn", "bg-sky-500","rounded","hover:bg-sky-600", "ms-auto", "me-2","p-2","transition","duration-300","hover:scale-110","ease-in-out");
     saveBtn.id = "saveBtn";
     saveBtn.textContent = "Save";
 
@@ -102,7 +102,7 @@ ul.addEventListener("click", async (event) => {
       const contentInput = document.querySelector("#contentInput").value;
 
       if (titleInput === "" || contentInput === "") {
-        UI.showAlert("warning", "Lütfen alanları doğru şekilde doldurunuz!");
+        UI.showAlert("bg-yellow-400", "Lütfen alanları doğru şekilde doldurunuz!");
       } else {
          await UI.saveInput("edit", id);
         await UI.init();
