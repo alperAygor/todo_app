@@ -1,72 +1,112 @@
 import { UI } from "./UI.js";
-const li = document.querySelector(".list-group-item");
-const addBtn = document.querySelector("#addBtn");
-const ul = document.querySelector(".list-group");
 
 document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        const data = await UI.getTasks();
-        UI.displayTask(data);
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-addBtn.addEventListener("click", (e) => {
-  const li = `<li class="list-group-item d-flex py-3">
-                <input type="text" class="form-control w-25 mx-2" id="titleInput">
-                <input type="text" class="form-control w-50 mx-2" id="contentInput">
-                <button class="btn btn-primary ms-auto me-2" id="saveBtn">Save</button>
-            </li>`;
-  ul.insertAdjacentHTML("beforeend", li);
-  addBtn.disabled = true;
-  
-  document.querySelector("#saveBtn").addEventListener("click", async (e) => {
-    UI.saveInput();
-    const data = await UI.getTasks();
-    UI.displayTask(data);
-    e.preventDefault();
-  });
-
-  e.preventDefault();
+  await UI.init();
 });
 
-ul.addEventListener("click", async (e) => {
-  const row = e.target.parentElement;
-  
-  if (e.target.classList.contains("fa-trash")) {
+const addBtn = document.querySelector("#addBtn");
+
+addBtn.addEventListener("click", () => {
+  const ul = document.querySelector(".list-group");
+
+  const li = document.createElement("li");
+  li.classList.add("list-group-item", "d-flex", "py-3");
+
+  const titleInput = document.createElement("input");
+  titleInput.classList.add("form-control", "w-25", "mx-2");
+  titleInput.id = "titleInput";
+  titleInput.type = "text";
+
+  const contentInput = document.createElement("input");
+  contentInput.classList.add("form-control", "w-50", "mx-2");
+  contentInput.id = "contentInput";
+  contentInput.type = "text";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.classList.add("btn", "btn-primary", "ms-auto", "me-2");
+  saveBtn.id = "saveBtn";
+  saveBtn.textContent = "Save";
+
+  li.appendChild(titleInput);
+  li.appendChild(contentInput);
+  li.appendChild(saveBtn);
+
+  ul.appendChild(li);
+
+  addBtn.disabled = true;
+
+  saveBtn.addEventListener("click", async () => {
+    const titleInput = document.querySelector("#titleInput").value;
+    const contentInput = document.querySelector("#contentInput").value;
+
+    if (titleInput === "" || contentInput === "") {
+      UI.showAlert("warning", "Lütfen alanları doğru şekilde doldurunuz!");
+    } else {
+      await UI.saveInput("add");
+    await UI.init();
+    }
+  });
+});
+
+const ul = document.querySelector(".list-group");
+
+ul.addEventListener("click", async (event) => {
+  const target = event.target;
+  const row = target.parentElement.parentElement;
+
+  if (target.classList.contains("fa-trash")) {
     const id = row.getAttribute("data-id");
     row.remove();
-    UI.deleteTask(id);
-    const data = await UI.getTasks();
-    UI.displayTask(data);
-  } else if (e.target.classList.contains("fa-pen-to-square")) {
+
+    try {
+      // const response = 
+      await fetch(`${UI.url}/${id}`, {
+        method: "DELETE"
+      });
+      // if(!response.ok){throw new error("hata")}
+    //   UI.taskList = await response.json();
+    //  UI.displayTask();
+      UI.showAlert("success", "Başarılı bir şekilde silindi");
+    } catch (error) {
+      console.error(error);
+    }
+    await UI.init();
+  } else if (target.classList.contains("fa-pen-to-square")) {
     addBtn.disabled = true;
     const id = row.getAttribute("data-id");
     row.innerHTML = "";
-    const data = await UI.getTasks();
-    const filteredTask = data.find((task) => task.id === id);
-    const input1 = document.createElement("input");
-    const input2 = document.createElement("input");
-    const button = document.createElement("button");
-    input1.classList = "form-control w-25 mx-2";
-    input2.classList = "form-control w-25 mx-2";
-    input1.id = "titleInput";
-    input2.id = "contentInput";
-    input1.value = filteredTask.title;
-    input2.value = filteredTask.content;
-    button.classList = "btn btn-primary ms-auto me-2";
-    button.textContent = "Save";
-    button.id = "saveBtn";
-    row.appendChild(input1);
-    row.appendChild(input2);
-    row.appendChild(button);
-    
-    document.querySelector("#saveBtn").addEventListener("click", async (e) => {
-      UI.saveInput();
-      const data = await UI.getTasks();
-      UI.displayTask(data);
-      e.preventDefault();
+
+    const filteredTask = UI.taskList.find((task) => task.id === id);
+
+    const titleInput = document.createElement("input");
+    titleInput.classList.add("form-control", "w-25", "mx-2");
+    titleInput.id = "titleInput";
+    titleInput.value = filteredTask.taskTitle;
+
+    const contentInput = document.createElement("input");
+    contentInput.classList.add("form-control", "w-50", "mx-2");
+    contentInput.id = "contentInput";
+    contentInput.value = filteredTask.taskContent;
+
+    const saveBtn = document.createElement("button");
+    saveBtn.classList.add("btn", "btn-primary", "ms-auto", "me-2");
+    saveBtn.id = "saveBtn";
+    saveBtn.textContent = "Save";
+
+    row.appendChild(titleInput);
+    row.appendChild(contentInput);
+    row.appendChild(saveBtn);
+
+    saveBtn.addEventListener("click", async () => {
+      const titleInput = document.querySelector("#titleInput").value;
+      const contentInput = document.querySelector("#contentInput").value;
+
+      if (titleInput === "" || contentInput === "") {
+        UI.showAlert("warning", "Lütfen alanları doğru şekilde doldurunuz!");
+      } else {
+         await UI.saveInput("edit", id);
+        await UI.init();
+        }
     });
   }
 });
