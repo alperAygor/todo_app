@@ -5,9 +5,9 @@ export class UI {
   static showAlert(alertType, message) {
     const header = document.querySelector(".header");
     const alert = document.createElement("div");
-    alert.classList=`container alert-${alertType}`;
+    alert.classList=`container ${alertType} mx-auto w-2/5 text-center my-3 py-4 rounded transition duration-300 ease-in delay-150`;
     alert.textContent = message;
-    header.appendChild(alert);
+    header.insertAdjacentElement("beforeend",alert);
 
     setTimeout(() => {
       alert.remove();
@@ -21,26 +21,26 @@ export class UI {
 
       this.taskList.forEach((task) => {
       const li = document.createElement("li");
-      li.classList.add("list-group-item", "d-flex", "py-3");
+      li.classList.add("list-group-item", "flex", "py-3");
       li.setAttribute("data-id", task.id);
 
       const h4 = document.createElement("h4");
-      h4.classList.add("h4", "task-title", "mx-2", "my-auto");
+      h4.classList.add("text-xl", "task-title", "mx-3", "my-auto");
       h4.textContent = task.taskTitle;
 
       const p = document.createElement("p");
-      p.classList.add("p", "task-content", "mx-5", "my-auto");
+      p.classList.add( "task-content", "mx-5", "my-auto");
       p.textContent = task.taskContent;
 
       const div = document.createElement("div");
       div.classList.add("my-auto", "ms-auto");
 
       const editIcon = document.createElement("i");
-      editIcon.classList.add("fa-solid", "fa-pen-to-square", "btn", "btn-warning", "mx-2", "ms-auto");
+      editIcon.classList.add("fa-solid", "fa-pen-to-square", "btn", "bg-yellow-500", "hover:bg-yellow-600", "ms-auto","p-2","rounded","mx-2","transition","duration-300","hover:scale-110","ease-in-out");
       editIcon.id = "edit";
 
       const deleteIcon = document.createElement("i");
-      deleteIcon.classList.add("fa-solid", "fa-trash", "btn", "btn-danger", "mx-2", "ms-auto");
+      deleteIcon.classList.add("fa-solid", "fa-trash", "btn", "bg-rose-600", "mx-2", "ms-auto" ,"p-2" ,"rounded","hover:bg-rose-700","transition","duration-300","hover:scale-110","ease-in-out");
       deleteIcon.id = "delete";
 
       div.appendChild(editIcon);
@@ -77,7 +77,7 @@ export class UI {
         // if(!response.ok){throw new error("hata")}
         // this.taskList = await response.json();
         //  UI.displayTask();
-        UI.showAlert("success", "Başarılı bir şekilde güncellendi");
+        UI.showAlert("bg-green-400", "Başarılı bir şekilde güncellendi");
       } catch (error) {
         console.error(error);
       }
@@ -99,7 +99,7 @@ export class UI {
         // if(!response.ok){throw new error("hata")}
       //   this.taskList = await response.json();
       //  UI.displayTask();
-        UI.showAlert("success", "Başarılı bir şekilde eklendi");
+        UI.showAlert("bg-green-400", "Başarılı bir şekilde eklendi");
       } catch (error) {
         console.error(error);
       }
